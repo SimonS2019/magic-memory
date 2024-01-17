@@ -1,15 +1,18 @@
-import React from "react";
-import "./SingleCard.css";
+import React from 'react'
+import './SingleCard.css'
 
-export default function SingleCard({card}) {
-  return (
-    <div>
-      <div className="card" >
+export default function SingleCard({ card, handleChoice }) {
+
+    const handleClick = () => {
+      handleChoice(card)
+    }
+  
+    return (
+      <div className="card">
         <div>
           <img className="front" src={card.src} alt="card front" />
-          <img className="back" src="/img/cover.png" alt="cover" />
+          <img className="back" src="/img/cover.png" onClick={handleClick} alt="cover" />
         </div>
       </div>
-    </div>
-  );
-}
+    )
+  }
