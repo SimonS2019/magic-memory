@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import SingleCard from './components/SingleCard'
 
-const cardImages = [
+let cardImages = [
   { "src": "/img/helmet-1.png", matched: false },
   { "src": "/img/potion-1.png", matched: false },
   { "src": "/img/ring-1.png", matched: false },
@@ -17,6 +17,7 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
+  const fileInput = useRef(null)
 
   // shuffle cards for new game
   const shuffleCards = () => {
@@ -28,6 +29,7 @@ function App() {
     setChoiceTwo(null)
     setCards(cards)
     setTurns(0)
+    console.log(cards);
   }
 
   // handle a choice
@@ -72,10 +74,28 @@ function App() {
     shuffleCards()
   }, [])
 
+  const handleFileUpload = () => {
+    console.log(fileInput.current.files[0]);
+    const file = fileInput.current.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const randomIndex = Math.floor(Math.random() * cardImages.length)
+        cardImages[randomIndex] = { "src": reader.result, matched: false }
+        shuffleCards()
+      }
+      reader.readAsDataURL(file) // read the file, not cardImages
+    }
+
+  }
+
   return (
     <div className="App">
       <h1>Magic Match</h1>
       <button onClick={shuffleCards}>New Game</button>
+      <input type="file" ref={fileInput} style={{ display: 'none' }} />
+      <button onClick={() => fileInput.current.click()}>Upload Image</button>
+      <button onClick={handleFileUpload}>Replace Random Image</button>
 
       <div className="card-grid">
         {cards.map(card => (
@@ -91,7 +111,7 @@ function App() {
 
       <p>Turns: {turns}</p>
     </div>
-  );
+  )
 }
 
 export default App

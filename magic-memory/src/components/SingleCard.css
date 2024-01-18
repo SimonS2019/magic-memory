@@ -28,3 +28,9 @@
   transform: rotateY(90deg);
   transition-delay: 0s;
 }
+
+.SingleCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This will ensure that the image covers the full area of the card without distorting the aspect ratio */
+}
