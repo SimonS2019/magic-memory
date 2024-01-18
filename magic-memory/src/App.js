@@ -99,14 +99,22 @@ function App() {
     <div className="App">
       <h1>Magic Match</h1>
       <button onClick={shuffleCards}>New Game</button>
+      <button
+        onClick={() => {
+          fileInput.current.click();
+          fileInput.current.onchange = () => {
+            handleFileUpload();
+          };
+        }}
+      >
+        Upload and Replace Image
+      </button>
       <input
         type="file"
         ref={fileInput}
         accept="image/*"
         style={{ display: "none" }}
       />
-      <button onClick={() => fileInput.current.click()}>Upload Image</button>
-      <button onClick={handleFileUpload}>Replace Random Image</button>
 
       <div className="card-grid">
         {cards.map((card) => (
