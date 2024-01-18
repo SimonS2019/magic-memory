@@ -128,7 +128,7 @@ function App() {
           />
         ))}
       </div>
-      <AllImages cards={cards} />
+      <AllImages cards={cardImages} />
 
       <p>Turns: {turns}</p>
     </div>
