@@ -74,20 +74,24 @@ function App() {
     shuffleCards()
   }, [])
 
-  const handleFileUpload = () => {
-    console.log(fileInput.current.files[0]);
-    const file = fileInput.current.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        const randomIndex = Math.floor(Math.random() * cardImages.length)
-        cardImages[randomIndex] = { "src": reader.result, matched: false }
-        shuffleCards()
-      }
-      reader.readAsDataURL(file) // read the file, not cardImages
-    }
+const currentImageIndex = useRef(0);
 
+const handleFileUpload = () => {
+  const file = fileInput.current.files[0]
+  if (file) {
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      if (currentImageIndex.current < cardImages.length) {
+        cardImages[currentImageIndex.current] = { "src": reader.result, matched: false }
+        currentImageIndex.current += 1;
+        shuffleCards()
+      } else {
+        alert('All images have been replaced. Please start a new game.');
+      }
+    }
+    reader.readAsDataURL(file)
   }
+}
 
   return (
     <div className="App">
