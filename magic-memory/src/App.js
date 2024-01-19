@@ -105,8 +105,13 @@ function App() {
     shuffleCards();
   }, []);
   const handleHayaImages = () => {
-    cardImages = [...hayaImages];
-    shuffleCards();
+    const date = window.prompt("Enter the date when we became a couple.(dd/mm/yyyy)");
+    if (date === "01012024") { // replace "correctDate" with the actual date
+      cardImages = [...hayaImages];
+      shuffleCards();
+    } else {
+      alert("Incorrect date, you are not my girlfriend!!!");
+    }
   };
   const handleDefault = () => {
     cardImages = [...originalImages];
