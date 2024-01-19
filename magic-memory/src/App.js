@@ -19,6 +19,7 @@ function App() {
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
   const fileInput = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
 
   // shuffle cards for new game
   const shuffleCards = () => {
@@ -30,6 +31,7 @@ function App() {
     setChoiceTwo(null);
     setCards(cards);
     setTurns(0);
+    setIsVisible(true);
     console.log(cards);
   };
 
@@ -37,6 +39,7 @@ function App() {
   const handleChoice = (card) => {
     console.log(card);
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);
+    setIsVisible(false);
   };
 
   // compare 2 selected cards
@@ -100,16 +103,18 @@ function App() {
     <div className="App">
       <h1>Magic Match</h1>
       <button onClick={shuffleCards}>New Game</button>
-      <button
-        onClick={() => {
-          fileInput.current.click();
-          fileInput.current.onchange = () => {
-            handleFileUpload();
-          };
-        }}
-      >
-        Upload and Replace Image
-      </button>
+      {isVisible && (
+        <button
+          onClick={() => {
+            fileInput.current.click();
+            fileInput.current.onchange = () => {
+              handleFileUpload();
+            };
+          }}
+        >
+          Upload and Replace Image
+        </button>
+      )}
       <input
         type="file"
         ref={fileInput}
@@ -128,9 +133,10 @@ function App() {
           />
         ))}
       </div>
-      <AllImages cards={cardImages} />
 
       <p>Turns: {turns}</p>
+
+      {isVisible && <AllImages cards={cardImages} />}
     </div>
   );
 }
