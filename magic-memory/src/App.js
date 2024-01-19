@@ -80,8 +80,14 @@ function App() {
   const currentImageIndex = useRef(0);
 
   const handleFileUpload = () => {
-    const file = fileInput.current.files[0];
-    if (file) {
+    console.log("handleFileUpload");
+    const files = fileInput.current.files;
+    if (files.length > cardImages.length) {
+      alert(`You can only upload a maximum of ${cardImages.length} files!`);
+      return;
+    }
+
+    Array.from(files).forEach((file, index) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         if (currentImageIndex.current < cardImages.length) {
@@ -96,20 +102,24 @@ function App() {
         }
       };
       reader.readAsDataURL(file);
-    }
+    });
+
+    // Reset the file input so the same file can be selected again if needed
+    fileInput.current.value = null;
   };
 
   return (
     <div className="App">
       <h1>Magic Match</h1>
-      <button className="btn" onClick={shuffleCards}>New Game</button>
+      <button className="btn" onClick={shuffleCards}>
+        New Game
+      </button>
       {isVisible && (
-        <button className="btn"
+        <button
+          className="btn"
           onClick={() => {
             fileInput.current.click();
-            fileInput.current.onchange = () => {
-              handleFileUpload();
-            };
+            fileInput.current.onchange = handleFileUpload;
           }}
         >
           Upload and Replace Image
@@ -117,9 +127,12 @@ function App() {
       )}
       <input
         type="file"
-        ref={fileInput}
+        id="fileUpload"
+        multiple
         accept="image/*"
         style={{ display: "none" }}
+        ref={fileInput}
+        max={cardImages.length}
       />
 
       <div className="card-grid">
