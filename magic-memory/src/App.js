@@ -102,9 +102,9 @@ function App() {
   return (
     <div className="App">
       <h1>Magic Match</h1>
-      <button onClick={shuffleCards}>New Game</button>
+      <button className="btn" onClick={shuffleCards}>New Game</button>
       {isVisible && (
-        <button
+        <button className="btn"
           onClick={() => {
             fileInput.current.click();
             fileInput.current.onchange = () => {
