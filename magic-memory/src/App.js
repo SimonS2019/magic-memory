@@ -11,6 +11,34 @@ let cardImages = [
   { src: "/img/shield-1.png", matched: false },
   { src: "/img/sword-1.png", matched: false },
 ];
+// Original images
+let originalImages = [
+  { src: "/img/helmet-1.png", matched: false },
+  { src: "/img/potion-1.png", matched: false },
+  { src: "/img/ring-1.png", matched: false },
+  { src: "/img/scroll-1.png", matched: false },
+  { src: "/img/shield-1.png", matched: false },
+  { src: "/img/sword-1.png", matched: false },
+];
+
+let hayaImages = [
+  { src: "/haya/Haya1.jpg", matched: false },
+  { src: "/haya/Haya2.jpg", matched: false },
+  { src: "/haya/Haya3.jpg", matched: false },
+  { src: "/haya/Haya4.jpg", matched: false },
+  { src: "/haya/Haya5.jpg", matched: false },
+  { src: "/haya/Haya6.jpg", matched: false },
+  // { src: "/haya/Haya7.jpg", matched: false },
+];
+
+let simonImages = [
+  { src: "/simon/simon1.jpg", matched: false },
+  { src: "/simon/simon2.jpg", matched: false },
+  { src: "/simon/simon3.jpg", matched: false },
+  { src: "/simon/simon4.jpg", matched: false },
+  { src: "/simon/simon5.png", matched: false },
+  { src: "/simon/simon6.jpg", matched: false },
+];
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -76,7 +104,18 @@ function App() {
   useEffect(() => {
     shuffleCards();
   }, []);
-
+  const handleHayaImages = () => {
+    cardImages = [...hayaImages];
+    shuffleCards();
+  };
+  const handleDefault = () => {
+    cardImages = [...originalImages];
+    shuffleCards();
+  };
+  const handleSimonImages = () => {
+    cardImages = [...simonImages];
+    shuffleCards();
+  };
   const currentImageIndex = useRef(0);
 
   const handleFileUpload = () => {
@@ -111,7 +150,11 @@ function App() {
   return (
     <div className="App">
       <h1>Magic Match</h1>
-      <button className="btn" onClick={shuffleCards}>
+      <button
+        className="btn"
+        onClick={handleDefault}
+        title="Start a new game with original images"
+      >
         New Game
       </button>
       {isVisible && (
@@ -125,6 +168,13 @@ function App() {
           Upload and Replace Image
         </button>
       )}
+      <button className="btn" onClick={handleHayaImages}>
+        Use Haya's Images
+      </button>
+
+      <button className="btn" onClick={handleSimonImages}>
+        Use Simon's Images
+      </button>
       <input
         type="file"
         id="fileUpload"
