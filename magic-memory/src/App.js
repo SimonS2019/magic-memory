@@ -173,6 +173,8 @@ function App() {
           Upload and Replace Image
         </button>
       )}
+      <br />
+      <br />
       <button className="btn" onClick={handleHayaImages}>
         Use Haya's Images
       </button>
