@@ -105,7 +105,7 @@ function App() {
     shuffleCards();
   }, []);
   const handleHayaImages = () => {
-    const date = window.prompt("Enter the date when we became a couple.(dd/mm/yyyy)");
+    const date = window.prompt("Enter the date when we became a couple.(ddmmyyyy)");
     if (date === "01012024") { // replace "correctDate" with the actual date
       cardImages = [...hayaImages];
       shuffleCards();
@@ -154,7 +154,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
+      <h1>Haha</h1>
       <button
         className="btn"
         onClick={handleDefault}
