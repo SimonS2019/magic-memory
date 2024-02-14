@@ -49,9 +49,18 @@ function App() {
   const fileInput = useRef(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isCakeCut, setIsCakeCut] = useState(false);
+  const [isCakeVisible, setIsCakeVisible] = useState(true);
 
-  const cakeImage = process.env.PUBLIC_URL + '/wholeCake.png'; // replace 'cakeImage.jpg' with your actual image file name
-  const sliceImage = process.env.PUBLIC_URL + '/sliceCake.png'; // replace 'sliceImage.jpg' with your actual image file name
+  const handleClick = () => {
+    setIsCakeCut(true);
+    setTimeout(() => {
+      setIsCakeVisible(false);
+    }, 3000); // delay of 3 seconds
+  };
+
+  const cakeImage = process.env.PUBLIC_URL + "/wholeCake (1).png"; // replace 'cakeImage.jpg' with your actual image file name
+  const sliceImage = process.env.PUBLIC_URL + "/sliceCake (1).png"; // replace 'sliceImage.jpg' with your actual image file name
+
 
   // shuffle cards for new game
   const shuffleCards = () => {
@@ -109,8 +118,11 @@ function App() {
     shuffleCards();
   }, []);
   const handleHayaImages = () => {
-    const date = window.prompt("Enter the date when we became a couple.(dd/mm/yyyy)");
-    if (date === "01012024") { // replace "correctDate" with the actual date
+    const date = window.prompt(
+      "Enter the date when we became a couple.(dd/mm/yyyy)"
+    );
+    if (date === "01012024") {
+      // replace "correctDate" with the actual date
       cardImages = [...hayaImages];
       shuffleCards();
     } else {
@@ -155,18 +167,29 @@ function App() {
     // Reset the file input so the same file can be selected again if needed
     fileInput.current.value = null;
   };
+  const appClass = isCakeVisible ? 'App' : 'App bgImage';
 
   return (
-    <div className="App">
-       <h1>Happy Birthday!</h1>
-      <img 
-        src={isCakeCut ? sliceImage : cakeImage} 
-        alt="cake" 
-        onClick={() => setIsCakeCut(true)} 
-        style={{cursor: 'pointer'}}
-      />
-      {isCakeCut && <p>Yum! Enjoy your virtual cake!</p>}
-      <h1>Magic Match</h1>
+    <div className={appClass}>
+      {isCakeVisible ? (
+        <div>
+          {" "}
+          <h1>宝宝~Happy Birthday~Mua~!</h1>
+          <h3>公主请切蛋糕～（点它）</h3>
+        </div>
+      ) : (
+        <h1>想要永远牵着你的手，走过一生。</h1>
+      )}
+      {isCakeVisible ? (
+        <img
+          className={`${isCakeCut ? "cut-cake" : ""}`}
+          src={isCakeCut ? sliceImage : cakeImage}
+          alt="cake"
+          onClick={handleClick}
+          style={{ cursor: "pointer" }}
+        />
+      ) : null}
+      <br></br>
       <button
         className="btn"
         onClick={handleDefault}

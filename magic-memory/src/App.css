@@ -2,6 +2,7 @@
   max-width: 860px;
   margin: 40px auto;
 }
+
 button {
   background: none;
   border: 2px solid #fff;
@@ -12,10 +13,12 @@ button {
   cursor: pointer;
   font-size: 1em;
 }
+
 button:hover {
   background: #c23866;
   color: #fff;
 }
+
 .card-grid {
   margin-top: 40px;
   display: grid;
@@ -25,4 +28,27 @@ button:hover {
 
 .btn {
   margin-right: 20px;
+}
+
+.cut-cake {
+  transition: transform 2s;
+  transform: scale(1.2);
+}
+
+.fade-out {
+  transition: opacity 2s;
+  opacity: 0;
+}
+
+.bgImage {
+  background-image: url("../public/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
 }
