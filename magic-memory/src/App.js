@@ -48,6 +48,10 @@ function App() {
   const [disabled, setDisabled] = useState(false);
   const fileInput = useRef(null);
   const [isVisible, setIsVisible] = useState(true);
+  const [isCakeCut, setIsCakeCut] = useState(false);
+
+  const cakeImage = process.env.PUBLIC_URL + '/wholeCake.png'; // replace 'cakeImage.jpg' with your actual image file name
+  const sliceImage = process.env.PUBLIC_URL + '/sliceCake.png'; // replace 'sliceImage.jpg' with your actual image file name
 
   // shuffle cards for new game
   const shuffleCards = () => {
@@ -154,6 +158,14 @@ function App() {
 
   return (
     <div className="App">
+       <h1>Happy Birthday!</h1>
+      <img 
+        src={isCakeCut ? sliceImage : cakeImage} 
+        alt="cake" 
+        onClick={() => setIsCakeCut(true)} 
+        style={{cursor: 'pointer'}}
+      />
+      {isCakeCut && <p>Yum! Enjoy your virtual cake!</p>}
       <h1>Magic Match</h1>
       <button
         className="btn"
