@@ -61,13 +61,7 @@ To ensure your web app is updated in real-time, you can deploy it to Firebase. F
     ```
     Make sure you have a Firebase account and the Firebase CLI installed.
 
-3. Initialize Firebase in your project:
-    ```bash
-    firebase init
-    ```
-    Select `Hosting` and follow the prompts to set up your Firebase project.
-
-4. Deploy to Firebase:
+3. Deploy to Firebase:
     ```bash
     firebase deploy
     ```
